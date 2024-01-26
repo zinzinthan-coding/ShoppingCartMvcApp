@@ -21,5 +21,14 @@ namespace ShoppingCart.Controllers
             
             return View("ProductIndex",lst);
         }
+
+        [HttpPost]
+        [ActionName("Create")]
+        public async Task<IActionResult> AddCart(ProductDataModel reqModel)
+        {
+            List<ProductDataModel> lst = await _dbContext.Products.ToListAsync();
+
+            return View("ProductIndex", lst);
+        }
     }
 }
