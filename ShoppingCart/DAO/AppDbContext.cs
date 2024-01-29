@@ -10,6 +10,6 @@ namespace ShoppingCart.DAO
         }
         public DbSet<ProductDataModel> Products { get; set; }
         public DbSet<ShoppingCartDataModel> ShoppingCarts { get; set;}
-        public DbSet<CartDetailModel> CartDetails { get; set; }
+        //public DbSet<CartDetailModel> CartDetails { get; set; }
     }
 }
