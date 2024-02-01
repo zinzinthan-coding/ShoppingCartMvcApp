@@ -11,7 +11,7 @@ closeCart.addEventListener('click', () => {
     body.classList.toggle('activeTabCart');
 })
 
-//============AddToCart()=================//
+//===================AddToCart()=========================//
 function addtoCart(id) {
 
     $.ajax({
@@ -28,13 +28,34 @@ function addtoCart(id) {
         }
     });
 }
-/////////////////////////////////////////////////////////
 
+//======================End===============================//
+
+//===================UpdateCart()=========================//
+function updateCart(id) {
+
+    $.ajax({
+        url: '/product/update',
+        type: 'POST',
+        data: {
+            id: id
+        },
+        success: function (data) {
+            $("#count").html(data);
+        },
+        error: function (request, status, error) {
+            console.log({ request, status, error });
+        }
+    });
+}
+
+//=========================End===============================//
+
+//========================ShowCart()========================//
 function showCart() {
     $.ajax({
         url: '/product/list',
         type: 'GET',
-
         success: function (data) {
             if (data != null) {
                 console.log(data);
@@ -62,32 +83,6 @@ function showCart() {
                     </div>
                 `;
             })
-            //cart.forEach(item => {
-            //    totalQuantity = totalQuantity + item.quantity;
-            //    let newItem = document.createElement('div');
-            //    newItem.classList.add('item');
-            //    newItem.dataset.id = item.product_id;
-
-            //let positionProduct = products.findIndex((value) => value.id == item.product_id);
-            //let info = products[positionProduct];
-            //listCartHTML.appendChild(newItem);
-            //newItem.innerHTML = `
-            //                <div class="image">
-            //                        <img src="${info.image}">
-            //                    </div>
-            //                    <div class="name">
-            //                    ${info.name}
-            //                    </div>
-            //                    <div class="totalPrice">$${info.price * item.quantity}</div>
-            //                    <div class="quantity">
-            //                        <span class="minus" data-id="${info.id}"><</span>
-            //                        <span>${item.quantity}</span>
-            //                        <span class="plus" data-id="${info.id}">></span>
-            //                    </div>
-            //                `;
-            //        })
-            //}
-            //iconCartSpan.innerText = totalQuantity;
         },
         error: function (request, status, error) {
             console.log({ request, status, error });

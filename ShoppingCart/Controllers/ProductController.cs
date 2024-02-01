@@ -71,7 +71,5 @@ namespace ShoppingCart.Controllers
                                   Quantity = c.Quantity
                               });
 
-            return Json(lst);
-        }
     }
 }
