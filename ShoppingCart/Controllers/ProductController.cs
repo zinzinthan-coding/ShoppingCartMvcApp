@@ -70,6 +70,7 @@ namespace ShoppingCart.Controllers
                                   TotalPrice = p.Price * c.Quantity,
                                   Quantity = c.Quantity
                               });
-
+            return Json(lst);
+        }
     }
 }
