@@ -59,7 +59,6 @@ function showCart() {
         success: function (data) {
             if (data != null) {
                 console.log(data);
-            }
            
             listCartHTML.innerHTML = '';
             data.forEach(item => {
