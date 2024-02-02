@@ -55,21 +55,46 @@ namespace ShoppingCart.Controllers
             return Json(qty);
         }
 
+        [HttpPost]
+        [ActionName("Update")]
+        public async Task<IActionResult> UpdateCart(int id)
+        {
+            try
+            {
+                var cartItem = await _dbContext.ShoppingCarts.FirstOrDefaultAsync(c => c.ProductId == id);
+                if (cartItem is not null)
+                {
+                    cartItem.Quantity--;
+                    if (cartItem.Quantity <= 0)
+                    {
+                        _dbContext.ShoppingCarts.Remove(cartItem);
+                    }
+                    _dbContext.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToString();
+            }
+            var qty = await _dbContext.ShoppingCarts.SumAsync(c => c.Quantity);
+            return Json(qty);
+        }
+
         [ActionName("List")]
         public IActionResult ListCart()
         {
 
             var lst = (from p in _dbContext.Products
-                              join c in _dbContext.ShoppingCarts on p.Id equals c.ProductId
-                              select new CartListResponseModel
-                              {
-                                  CartId = c.Id,
-                                  ProductId = p.Id,
-                                  ProductName = p.ProductName,
-                                  Image = p.Image,
-                                  TotalPrice = p.Price * c.Quantity,
-                                  Quantity = c.Quantity
-                              });
+                       join c in _dbContext.ShoppingCarts on p.Id equals c.ProductId
+                       select new CartListResponseModel
+                       {
+                           CartId = c.Id,
+                           ProductId = p.Id,
+                           ProductName = p.ProductName,
+                           Image = p.Image,
+                           TotalPrice = p.Price * c.Quantity,
+                           Quantity = c.Quantity
+                       });
             return Json(lst);
         }
     }

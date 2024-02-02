@@ -18,7 +18,7 @@
             @foreach (var item in Model)
             {
                 <div class="item">
-                    <img src="~/images/@item.Image">
+                    <img src="/images/@item.Image">
                     <h2>@item.ProductName</h2>
                     <div class="price">$@item.Price</div>
                     <button type="button" class="addCart" onclick="addtoCart(@item.Id)">

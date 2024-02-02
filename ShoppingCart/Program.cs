@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ShoppingCart.DAO;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +14,6 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 ServiceLifetime.Transient,
 ServiceLifetime.Transient
 );
-
 
 var app = builder.Build();
 
